@@ -11,7 +11,10 @@ from rest_framework.views import APIView
 
 class StarsAPIView(APIView):
     def get(self, request):
-        return Response({'title':'Jason'})   # Возращать клиенту json стороку
+        return Response()   # Возращать клиенту json стороку
+
+    def post(self, request):
+        return Response()
 
 # class StarsAPIView(generics.ListAPIView):
 #     queryset = Stars.objects.all() # будет брать все поля модели
