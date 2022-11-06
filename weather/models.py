@@ -1,10 +1,10 @@
 from django.db import models
 
-class Weather(models.Model):
+class Stars(models.Model):
     title = models.CharField(max_length=500)
     content = models.TextField()
     is_published = models.BooleanField(default=True)
-    cat = models.ForeignKey()
+    cat = models.ForeignKey("Category", on_delete=models.CASCADE)
 
 
     def __str__(self):
