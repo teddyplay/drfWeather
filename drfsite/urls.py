@@ -20,6 +20,6 @@ from weather.views import StarsAPIView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/stars', StarsAPIView.as_view())
+    path('api/v1/stars/', StarsAPIView.as_view())
 
 ]
