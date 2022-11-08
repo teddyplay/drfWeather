@@ -11,8 +11,8 @@ from rest_framework.views import APIView
 
 class StarsAPIView(APIView):
     def get(self, request):
-        lst = Stars.objects.all().values()
-        return Response({'posts':list(lst)})   # Возращать клиенту json стороку,
+        s = Stars.objects.all()
+        return Response({'posts': StarsSerializer(s, many=True).data})   # Возращать клиенту json стороку,
 
     def post(self, request):
         new_post = Stars.objects.create( # создаю функцию создания поста
@@ -20,7 +20,7 @@ class StarsAPIView(APIView):
             content=request.data['content'],
             cat_id=request.data['cat_id']
         )
-        return Response({'post': model_to_dict(new_post)})
+        return Response({'post': StarsSerializer(new_post).data})
 
 
 

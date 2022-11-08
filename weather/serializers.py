@@ -7,10 +7,10 @@ from rest_framework.renderers import JSONRenderer
 from .models import Stars
 
 
-class StarsModel:
-    def __init__(self, title , content):
-        self.title = title
-        self.content = content
+# class StarsModel:
+#     def __init__(self, title , content):
+#         self.title = title
+#         self.content = content
         # модель для преобразования в json формат
 
 
@@ -18,23 +18,29 @@ class StarsModel:
 class StarsSerializer(serializers.Serializer): # будем брать из бд модели
     title = serializers.CharField(max_length=350)
     content = serializers.CharField()
+    is_published = serializers.BooleanField(default=True)
+    cat_id = serializers.IntegerField()
+    # class Meta:
+    #     model = Stars
+    #     fields = ('title', 'content', 'cat_id')
 
 
-def encode():
-    model = StarsModel('Rick and Morty', 'content: rick and morty')
-    model_sr = StarsSerializer(model)
-    print(model_sr.data, type(model_sr.data), sep='\n')
-    json = JSONRenderer().render(model_sr.data)
-    print(json)
-    # фунция  для вывода сыррого формата json
 
-
-def decode():
-    stream = io.BytesIO(b'{"title":"tick and morty", "content":"Content: Rick and Morty"}')
-    data = JSONParser().parse(stream)
-    serializers = StarsSerializer(data=data)
-    serializers.is_valid()
-    print(serializers.validated_data)
+# def encode():
+#     model = StarsModel('Rick and Morty', 'content: rick and morty')
+#     model_sr = StarsSerializer(model)
+#     print(model_sr.data, type(model_sr.data), sep='\n')
+#     json = JSONRenderer().render(model_sr.data)
+#     print(json)
+#     # фунция  для вывода сыррого формата json
+#
+#
+# def decode():
+#     stream = io.BytesIO(b'{"title":"tick and morty", "content":"Content: Rick and Morty"}')
+#     data = JSONParser().parse(stream)
+#     serializers = StarsSerializer(data=data)
+#     serializers.is_valid()
+#     print(serializers.validated_data)
 #функция для получения сырых данных json
 
 
@@ -42,7 +48,5 @@ def decode():
 
 
 
-    # class Meta:
-    #     model = Stars
-    #     fields = ('title', 'content', 'cat_id')
+
 
