@@ -1,4 +1,7 @@
+import io
+
 from rest_framework import serializers
+from rest_framework.parsers import JSONParser
 from rest_framework.renderers import JSONRenderer
 
 from .models import Stars
@@ -22,11 +25,17 @@ def encode():
     model_sr = StarsSerializer(model)
     print(model_sr.data, type(model_sr.data), sep='\n')
     json = JSONRenderer().render(model_sr.data)
-    # фунция  для вывода сыррого формата json
     print(json)
+    # фунция  для вывода сыррого формата json
 
 
-
+def decode():
+    stream = io.BytesIO(b'{"title":"tick and morty", "content":"Content: Rick and Morty"}')
+    data = JSONParser().parse(stream)
+    serializers = StarsSerializer(data=data)
+    serializers.is_valid()
+    print(serializers.validated_data)
+#функция для получения сырых данных json
 
 
 
