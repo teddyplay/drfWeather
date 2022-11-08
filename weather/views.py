@@ -20,9 +20,14 @@ class StarsAPIView(APIView):
             content=request.data['content'],
             cat_id=request.data['cat_id']
         )
-        return Response({'post':model_to_dict(new_post)})
+        return Response({'post': model_to_dict(new_post)})
+
+
 
 # class StarsAPIView(generics.ListAPIView):
 #     queryset = Stars.objects.all() # будет брать все поля модели
 #     serializer_class = StarsSerializer
+
+
+
 
