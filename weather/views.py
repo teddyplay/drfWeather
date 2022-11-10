@@ -15,12 +15,21 @@ class StarsAPIView(APIView):
         return Response({'posts': StarsSerializer(s, many=True).data})   # Возращать клиенту json стороку,
 
     def post(self, request):
-        new_post = Stars.objects.create( # создаю функцию создания поста
-            title=request.data['title'],
-            content=request.data['content'],
-            cat_id=request.data['cat_id']
-        )
-        return Response({'post': StarsSerializer(new_post).data})
+        serializer = StarsSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True) # проверка на провалильновать введных данных
+        serializer.save() # автоматом добавляет новую запись, берет с serailizers
+
+
+        # new_post = Stars.objects.create( # создаю функцию создания поста
+        #     title=request.data['title'],
+        #     content=request.data['content'],
+        #     cat_id=request.data['cat_id']
+        # )
+        return Response({'post': serializer.data})
+
+
+
+
 
 
 

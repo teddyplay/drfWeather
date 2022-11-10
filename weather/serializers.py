@@ -7,7 +7,7 @@ from rest_framework.renderers import JSONRenderer
 from .models import Stars
 
 
-# class StarsModel:
+# class StarsModel:в
 #     def __init__(self, title , content):
 #         self.title = title
 #         self.content = content
@@ -23,6 +23,22 @@ class StarsSerializer(serializers.Serializer): # будем брать из бд
     # class Meta:
     #     model = Stars
     #     fields = ('title', 'content', 'cat_id')
+
+    def create(self, validated_data):
+        return Stars.objects.create(**validated_data) # позволяет создаватвь новые посты
+
+    def update(self, instance, validated_data):
+        instance.title = validated_data.get('title', instance.title)
+        instance.content = validated_data.get('content', validated_data.content)
+        instance.is_published = validated_data.get('is_published', validated_data.is_published)
+        instance.cat_id = validated_data.get('cat_id', validated_data.cat_id)
+        instance.save()
+        return instance # метод для изменения данных - объекта
+
+
+
+
+
 
 
 
